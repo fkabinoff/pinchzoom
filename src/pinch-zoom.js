@@ -130,6 +130,7 @@ var definePinchZoom = function () {
             lockDragAxis: false,
             setOffsetsOnce: false,
             use2d: true,
+            cover: false,
             zoomStartEventName: 'pz_zoomstart',
             zoomUpdateEventName: 'pz_zoomupdate',
             zoomEndEventName: 'pz_zoomend',
@@ -261,17 +262,10 @@ var definePinchZoom = function () {
          * the element should be centered in the container upon initialization
          */
         computeInitialOffset: function () {
-            if (this.options.cover) {
-                this.initialOffset = {
-                    x: 0,
-                    y: 0,
-                };
-            } else {
-                this.initialOffset = {
-                    x: -Math.abs(this.el.offsetWidth * this.getInitialZoomFactor() - this.container.offsetWidth) / 2,
-                    y: -Math.abs(this.el.offsetHeight * this.getInitialZoomFactor() - this.container.offsetHeight) / 2,
-                };
-            }
+            this.initialOffset = {
+                x: this.options.cover ? 0 : -Math.abs(this.el.offsetWidth * this.getInitialZoomFactor() - this.container.offsetWidth) / 2,
+                y: this.options.cover ? 0 : -Math.abs(this.el.offsetHeight * this.getInitialZoomFactor() - this.container.offsetHeight) / 2,
+            };
         },
 
         /**
@@ -523,10 +517,7 @@ var definePinchZoom = function () {
         getInitialZoomFactor: function () {
             var xZoomFactor = this.container.offsetWidth / this.el.offsetWidth;
             var yZoomFactor = this.container.offsetHeight / this.el.offsetHeight;
-            if (this.options.cover) {
-                return Math.max(xZoomFactor, yZoomFactor);
-            }
-            return Math.min(xZoomFactor, yZoomFactor);
+            return this.options.cover ? Math.max(xZoomFactor, yZoomFactor) : Math.min(xZoomFactor, yZoomFactor);
         },
 
         /**
