@@ -516,7 +516,9 @@ var definePinchZoom = function () {
         getInitialZoomFactor: function () {
             var xZoomFactor = this.container.offsetWidth / this.el.offsetWidth;
             var yZoomFactor = this.container.offsetHeight / this.el.offsetHeight;
-
+            if (this.options.cover) {
+                return Math.max(xZoomFactor, yZoomFactor);
+            }
             return Math.min(xZoomFactor, yZoomFactor);
         },
 

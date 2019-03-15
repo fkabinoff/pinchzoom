@@ -1,6 +1,6 @@
 {
   "name": "pinch-zoom-js",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Browser library for multi-touch gestures to zoom and drag on any DOM element.",
   "author": "Manuel Stofer",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "babel-preset-env": "~1.6.1"
   },
   "scripts": {
-    "build": "script/build.sh",
+    "build": "sh script/build.sh",
     "prepublish": "npm run build"
   }
 }
