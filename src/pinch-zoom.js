@@ -261,10 +261,17 @@ var definePinchZoom = function () {
          * the element should be centered in the container upon initialization
          */
         computeInitialOffset: function () {
-            this.initialOffset = {
-                x: -Math.abs(this.el.offsetWidth * this.getInitialZoomFactor() - this.container.offsetWidth) / 2,
-                y: -Math.abs(this.el.offsetHeight * this.getInitialZoomFactor() - this.container.offsetHeight) / 2,
-            };
+            if (this.options.cover) {
+                this.initialOffset = {
+                    x: 0,
+                    y: 0,
+                };
+            } else {
+                this.initialOffset = {
+                    x: -Math.abs(this.el.offsetWidth * this.getInitialZoomFactor() - this.container.offsetWidth) / 2,
+                    y: -Math.abs(this.el.offsetHeight * this.getInitialZoomFactor() - this.container.offsetHeight) / 2,
+                };
+            }
         },
 
         /**
