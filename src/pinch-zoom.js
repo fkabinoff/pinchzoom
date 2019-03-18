@@ -131,6 +131,7 @@ var definePinchZoom = function () {
             setOffsetsOnce: false,
             use2d: true,
             cover: false,
+            translate: true,
             zoomStartEventName: 'pz_zoomstart',
             zoomUpdateEventName: 'pz_zoomupdate',
             zoomEndEventName: 'pz_zoomend',
@@ -702,9 +703,9 @@ var definePinchZoom = function () {
                     offsetX = -this.offset.x / zoomFactor,
                     offsetY = -this.offset.y / zoomFactor,
                     transform3d =   'scale3d('     + zoomFactor + ', '  + zoomFactor + ',1) ' +
-                        'translate3d(' + offsetX    + 'px,' + offsetY    + 'px,0px)',
+                        this.options.translate ? 'translate3d(' + offsetX    + 'px,' + offsetY    + 'px,0px)' : '',
                     transform2d =   'scale('       + zoomFactor + ', '  + zoomFactor + ') ' +
-                        'translate('   + offsetX    + 'px,' + offsetY    + 'px)',
+                        this.options.translate ? 'translate('   + offsetX    + 'px,' + offsetY    + 'px)' : '',
                     removeClone = (function () {
                         if (this.clone) {
                             this.clone.parentNode.removeChild(this.clone);
